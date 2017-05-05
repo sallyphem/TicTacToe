@@ -47,12 +47,21 @@ def is_board_full(board):
     else:
         return True
 
-def get_computer_move(board,player):
+def get_computer_move(board,player,opponent):
     #check for a win
     for i in range(1,10):
         if board[i] == " ":
             board[i] = player
             if is_winner(board,player):
+                board[i] = " "
+                return i
+            else:
+                board[i] = " "
+
+    for i in range(1,10):
+        if board[i] == " ":
+            board[i] = opponent
+            if is_winner(board,opponent):
                 board[i] = " "
                 return i
             else:
@@ -96,7 +105,7 @@ while True:
         break
 
     #get player O input
-    choice = get_computer_move(board, "O")
+    choice = get_computer_move(board, "O","X")
 
     if board[choice] == " ":
         board[choice] = "O"
